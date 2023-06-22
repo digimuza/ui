@@ -2,7 +2,7 @@ import { Mode } from "./types";
 
 export function linkButtonVariant(mode: Mode) {
 	if (mode === "gray") {
-		return ["text-gray-700 disabled:text-gray-300 hover:text-gray-900"];
+		return ["text-gray-500 disabled:text-gray-300 hover:text-gray-900"];
 	}
 	if (mode === "destructive") {
 		return ["text-error-700 disabled:text-error-300 hover:text-error-900"];

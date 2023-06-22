@@ -3,41 +3,52 @@ import { Mail } from "../../icons/base/icons";
 import { Affix } from "./Affix";
 import { FieldText } from "./FieldText";
 import { BaseInput } from "./_internal/BaseInput";
-import { FieldFooter } from "./_internal/FieldFooter";
+import { InputFooter } from "./_internal/FieldFooter";
 import { InputContainer } from "./_internal/InputContainer";
+import { InputContextProvider } from "./_internal/InputContext";
 import { Label } from "./_internal/Label";
 
-export function FieldEmail(props: Omit<FieldText, "prefix" | "suffix">) {
-	const { name, label, description, placeholder } = props;
+export function FieldEmail(props: FieldText) {
+	const {
+		name,
+		label,
+		description,
+		footer,
+		size,
+		disabled,
+		placeholder,
+		prefix,
+		suffix,
+	} = props;
+
 	return (
 		<Controller
 			render={({ field, fieldState }) => {
 				return (
-					<div className="grow">
-						{label && <Label htmlFor={`${name}-input`}>{label}</Label>}
+					<InputContextProvider
+						name={name}
+						size={size}
+						description={description}
+						footer={footer}
+						placeholder={placeholder ?? "example@example.com"}
+						label={label}
+						type={"email"}
+						disabled={disabled}
+						error={fieldState.error?.message}
+					>
+						<Label />
 						<InputContainer
-							prefix={
-								<Affix variant={"bordered"}>
-									<Mail />
-								</Affix>
-							}
-							variant={fieldState.error ? "error" : "default"}
+							suffix={suffix}
+							prefix={prefix ?? <Affix icon={<Mail />} />}
 						>
 							<BaseInput
-								placeholder={placeholder}
-								id={`${name}-input`}
 								value={field.value ?? ""}
 								onChange={field.onChange}
 								onBlur={field.onBlur}
-								name={field.name}
-								type="email"
 							/>
 						</InputContainer>
-						<FieldFooter variant={fieldState.error ? "error" : "default"}>
-							{!fieldState.error && description}
-							{fieldState.error?.message}
-						</FieldFooter>
-					</div>
+						<InputFooter />
+					</InputContextProvider>
 				);
 			}}
 			name={name}

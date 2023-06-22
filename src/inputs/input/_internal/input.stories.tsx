@@ -1,8 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FieldText } from "..";
+import { Affix, FieldEmail, FieldText } from "..";
 import { Button } from "../../../buttons/button";
 import { AlertCircle, Check, User } from "../../../icons/base/icons";
+import { FieldPassword } from "../FieldPassword";
 
 const meta: Meta = {
 	title: "Inputs/Input",
@@ -52,16 +53,17 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default: StoryFn<typeof FieldText> = (args) => {
+export const Default: StoryFn<typeof FieldText> = () => {
 	return (
 		<div className="flex flex-col space-y-8">
 			<FieldText
-				iconLeft={<User />}
+				prefix={<Affix icon={<User />} />}
 				label="Name"
 				placeholder="sample"
-				{...args}
 				name="name"
 			/>
+			<FieldPassword name="password" label="Sample" />
+			<FieldEmail label="Email" description="You company email" name="email" />
 		</div>
 	);
 };

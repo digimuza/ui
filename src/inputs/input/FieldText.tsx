@@ -1,21 +1,19 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { Controller } from "react-hook-form";
-import { Icon } from "../../icons/base";
-import { AlertCircle } from "../../icons/base/icons";
 import { BaseInput } from "./_internal/BaseInput";
-import { FieldFooter } from "./_internal/FieldFooter";
+import { InputFooter } from "./_internal/FieldFooter";
 import { InputContainer } from "./_internal/InputContainer";
+import { InputContextProvider } from "./_internal/InputContext";
 import { Label } from "./_internal/Label";
 export type FieldText = {
 	name: string;
 	label?: string;
 	placeholder?: string;
+	disabled?: boolean;
 	description?: string;
-	iconLeft?: React.ReactNode;
-	iconRight?: React.ReactNode;
-	prefix?: React.ReactNode;
-	suffix?: React.ReactNode;
-	footer?: React.ReactNode;
+	prefix?: React.ReactNode | React.ReactNode[];
+	suffix?: React.ReactNode | React.ReactNode[];
+	footer?: React.ReactNode | React.ReactNode[];
 	size?: "sm" | "lg";
 };
 export function FieldText(props: FieldText) {
@@ -25,8 +23,7 @@ export function FieldText(props: FieldText) {
 		description,
 		size,
 		placeholder,
-		iconLeft,
-		iconRight,
+		disabled,
 		prefix,
 		suffix,
 		footer,
@@ -36,76 +33,30 @@ export function FieldText(props: FieldText) {
 		<Controller
 			render={({ field, fieldState }) => {
 				return (
-					<div className="grow relative">
-						{label && <Label htmlFor={`${name}-input`}>{label}</Label>}
-						<InputContainer
-							prefix={
-								<>
-									<>
-										{prefix}
-										{!prefix && iconLeft && (
-											<span className="h-full flex justify-center items-center border-r">
-												<Icon size={size} className="mx-3">
-													{iconLeft}
-												</Icon>
-											</span>
-										)}
-									</>
-								</>
-							}
-							suffix={
-								<>
-									{fieldState.error && (
-										<Icon className="text-error-500 mr-3">
-											<AlertCircle />
-										</Icon>
-									)}
-									{suffix}
-									{!suffix && iconRight && (
-										<Icon size={size} className="mr-3">
-											{iconRight}
-										</Icon>
-									)}
-								</>
-							}
-							variant={fieldState.error ? "error" : "default"}
-						>
+					<InputContextProvider
+						name={name}
+						disabled={disabled}
+						size={size}
+						description={description}
+						footer={footer}
+						placeholder={placeholder}
+						label={label}
+						error={fieldState.error?.message}
+					>
+						<Label />
+						<InputContainer prefix={prefix} suffix={suffix}>
 							<BaseInput
-								placeholder={placeholder}
-								id={`${name}-input`}
 								value={field.value ?? ""}
 								onChange={field.onChange}
 								onBlur={field.onBlur}
 								name={field.name}
 							/>
 						</InputContainer>
-						{footer === undefined ? (
-							<>
-								{fieldState.error && (
-									<FieldFooter variant={"error"}>
-										{!fieldState.error && description}
-										{fieldState.error?.message}
-									</FieldFooter>
-								)}
-								{!fieldState.error && description && (
-									<FieldFooter variant={"default"}>{description}</FieldFooter>
-								)}
-							</>
-						) : (
-							footer
-						)}
-					</div>
+						<InputFooter />
+					</InputContextProvider>
 				);
 			}}
 			name={name}
 		/>
 	);
 }
-
-FieldText.Icon = (props: PropsWithChildren<{}>) => {
-	return (
-		<Icon size={"md"} className="ml-3">
-			{props.children}
-		</Icon>
-	);
-};

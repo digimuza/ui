@@ -1,25 +1,35 @@
-import { VariantProps, cva } from "class-variance-authority";
 import { PropsWithChildren } from "react";
+import { Button } from "../../buttons/button";
+import { Icon } from "../../icons/base";
+import { cn } from "../../utils/cn";
 
-const variants = cva(
-	"flex justify-center items-center text-gray-500 self-stretch",
-	{
-		variants: {
-			variant: {
-				bordered: "px-3 bg-gray-200 border-r border-gray-300",
-				empty: "pl-3 py-3 text-gray-500",
-			},
-		},
-		defaultVariants: {
-			variant: "empty",
-		},
-	},
-);
-
-export type Affix = VariantProps<typeof variants> & {
+export type Affix = {
 	className?: string;
+	icon?: React.ReactNode;
+	bordered?: boolean;
+	position?: "left" | "right";
 };
 export function Affix(props: PropsWithChildren<Affix>) {
-	const { children, className, variant } = props;
-	return <div className={variants({ className, variant })}>{children}</div>;
+	const { children, className, bordered = true, icon, position } = props;
+	return (
+		<span
+			className={cn(
+				"h-full flex justify-center text-xs items-center",
+				bordered && position === "left" && "border-r",
+				bordered && position === "right" && "border-l",
+				className,
+			)}
+		>
+			{children}
+			{!children && icon && <Icon className="mx-3">{icon}</Icon>}
+		</span>
+	);
+}
+
+export function AffixButton(props: Button & { position?: "left" | "right" }) {
+	return (
+		<Affix position={props.position}>
+			<Button {...props} type={"button"} />
+		</Affix>
+	);
 }

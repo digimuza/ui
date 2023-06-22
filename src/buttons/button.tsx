@@ -40,7 +40,7 @@ const combinations = generateVariationArray({
 });
 
 const variants = cva(
-	"inline-flex items-center transition-all cursor-pointer justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
+	"inline-flex items-center transition-all cursor-pointer justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
 	{
 		compoundVariants: combinations,
 		variants: {
@@ -54,8 +54,13 @@ const variants = cva(
 			variant: {
 				primary: ["enabled:active:ring-2 border rounded-md"],
 				secondary: ["enabled:active:ring-2 border rounded-md"],
-				ghost: ["bg-white", "enabled:active:ring-2 rounded-md"],
-				link: [],
+				ghost: [
+					"bg-white",
+					"enabled:active:ring-2 rounded-md focus-visible:ring-0",
+				],
+				link: [
+					"focus-visible:ring-0 focus-visible:outline -outline-offset-[5px] outline-1 outline-primary-100",
+				],
 			},
 			size: {
 				xs: "h-9 px-3 text-sm space-x-2",

@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
-import { Minimize } from "../../icons/base";
+import { Package } from "../../icons/base/icons";
 import { generateVariationArray } from "../../utils/cartesianProduct";
 import { Button } from "../button";
 
@@ -38,15 +38,15 @@ const meta: Meta<typeof Button> = {
 export default meta;
 
 export const Default: StoryFn<typeof Button> = (args) => {
-	return <Button text="Button" iconLeft={<Minimize />} {...args} />;
+	return <Button text="Button" iconLeft={<Package />} {...args} />;
 };
 
 const combinations = generateVariationArray({
 	variant: ["primary", "secondary", "ghost", "link"] as const,
 	mode: ["default", "destructive", "gray", "success", "warning"] as const,
 	text: ["Button"] as const,
-	iconLeft: [undefined, <Minimize />] as const,
-	icon: [undefined, <Minimize />] as const,
+	iconLeft: [undefined, <Package />] as const,
+	icon: [undefined, <Package />] as const,
 }).filter(({ iconLeft, icon }) => {
 	if (iconLeft && icon) return false;
 	return true;

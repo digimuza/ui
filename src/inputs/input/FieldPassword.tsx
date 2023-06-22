@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { Affix } from ".";
-import { IoMdEye, IoMdEyeOff } from "../../icons";
+import { Eye, EyeOff } from "../../icons/base";
+import { Affix } from "./Affix";
 import { FieldText } from "./FieldText";
 import { BaseInput } from "./_internal/BaseInput";
 import { FieldFooter } from "./_internal/FieldFooter";
@@ -31,7 +31,7 @@ export function FieldPassword(props: FieldPassword) {
 										onClick={() => setVisible(!visible)}
 										type={"button"}
 									>
-										{visible ? <IoMdEyeOff /> : <IoMdEye />}
+										{visible ? <EyeOff /> : <Eye />}
 									</button>
 								</Affix>
 							}

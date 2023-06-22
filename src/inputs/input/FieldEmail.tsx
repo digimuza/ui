@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { MdAlternateEmail } from "react-icons/md";
+import { Mail } from "../../icons/base/icons";
 import { Affix } from "./Affix";
 import { FieldText } from "./FieldText";
 import { BaseInput } from "./_internal/BaseInput";
@@ -18,7 +18,7 @@ export function FieldEmail(props: Omit<FieldText, "prefix" | "suffix">) {
 						<InputContainer
 							prefix={
 								<Affix variant={"bordered"}>
-									<MdAlternateEmail />
+									<Mail />
 								</Affix>
 							}
 							variant={fieldState.error ? "error" : "default"}

@@ -1,3 +1,4 @@
+import React from "react";
 import { Controller } from "react-hook-form";
 import { BaseInput } from "./_internal/BaseInput";
 import { FieldFooter } from "./_internal/FieldFooter";
@@ -10,10 +11,12 @@ export type FieldText = {
 	description?: string;
 	prefix?: React.ReactNode;
 	suffix?: React.ReactNode;
+	footer?: React.ReactNode;
 	size?: "sm" | "lg";
 };
 export function FieldText(props: FieldText) {
-	const { name, label, description, prefix, placeholder, suffix } = props;
+	const { name, label, description, prefix, placeholder, footer, suffix } =
+		props;
 	return (
 		<Controller
 			render={({ field, fieldState }) => {
@@ -34,10 +37,14 @@ export function FieldText(props: FieldText) {
 								name={field.name}
 							/>
 						</InputContainer>
-						<FieldFooter variant={fieldState.error ? "error" : "default"}>
-							{!fieldState.error && description}
-							{fieldState.error?.message}
-						</FieldFooter>
+						{footer === undefined ? (
+							<FieldFooter variant={fieldState.error ? "error" : "default"}>
+								{!fieldState.error && description}
+								{fieldState.error?.message}
+							</FieldFooter>
+						) : (
+							footer
+						)}
 					</div>
 				);
 			}}

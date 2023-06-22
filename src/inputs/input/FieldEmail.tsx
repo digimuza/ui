@@ -8,7 +8,7 @@ import { InputContainer } from "./_internal/InputContainer";
 import { Label } from "./_internal/Label";
 
 export function FieldEmail(props: Omit<FieldText, "prefix" | "suffix">) {
-	const { name, label, description, placeholder, size } = props;
+	const { name, label, description, placeholder } = props;
 	return (
 		<Controller
 			render={({ field, fieldState }) => {
@@ -16,7 +16,6 @@ export function FieldEmail(props: Omit<FieldText, "prefix" | "suffix">) {
 					<div className="grow">
 						{label && <Label htmlFor={`${name}-input`}>{label}</Label>}
 						<InputContainer
-							size={size}
 							prefix={
 								<Affix variant={"bordered"}>
 									<MdAlternateEmail />

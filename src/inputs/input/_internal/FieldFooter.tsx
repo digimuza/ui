@@ -5,7 +5,7 @@ const variants = cva("flex justify-start items-start text-sm ", {
 	variants: {
 		variant: {
 			default: "text-gray-500",
-			error: "text-red-300 dark:text-red-300",
+			error: "text-error-500",
 		},
 		size: {
 			sm: "h-9",

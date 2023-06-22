@@ -1,13 +1,14 @@
 import { VariantProps, cva } from "class-variance-authority";
 import { PropsWithChildren } from "react";
+import { cn } from "../../../utils/cn";
 
 const variants = cva(
-	"group flex border border-gray-300 shadow-sm focus-within:ring-2 rounded-lg overflow-hidden justify-between items-center",
+	"group flex border outline-none relative text-gray-500 h-11 bg-white shadow-sm focus-within:ring-4 rounded-md overflow-hidden justify-between items-center",
 	{
 		variants: {
 			variant: {
-				default: "border-gray-300",
-				error: "border-red-300 ",
+				default: "border-gray-300 ring-primary-100 shadow-sm",
+				error: "border-error-300 ring-error-100",
 			},
 		},
 		defaultVariants: {
@@ -31,7 +32,9 @@ export function InputContainer(props: PropsWithChildren<InputContainer>) {
 			})}
 		>
 			{prefix}
-			<div className="flex flex-wrap w-full">{children}</div>
+			<div className={cn("flex flex-wrap w-full", !prefix && "mr-3")}>
+				{children}
+			</div>
 			{suffix}
 		</div>
 	);

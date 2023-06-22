@@ -12,7 +12,7 @@ export function BaseInput(
 		<input
 			type="text"
 			className={cn(
-				"px-3 h-12 grow min-w-[50px] outline-none bg-transparent",
+				"grow min-w-[50px] h-11 px-3 text-gray-500 outline-none bg-transparent",
 				className,
 			)}
 			{...rest}

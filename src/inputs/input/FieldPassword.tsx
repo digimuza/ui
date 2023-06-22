@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { Eye, EyeOff } from "../../icons/base";
-import { Affix } from "./Affix";
-import { FieldText } from "./FieldText";
-import { BaseInput } from "./_internal/BaseInput";
-import { FieldFooter } from "./_internal/FieldFooter";
-import { InputContainer } from "./_internal/InputContainer";
-import { Label } from "./_internal/Label";
+import { Eye, EyeOff } from "../../../icons/base/icons";
+import { Affix } from "../Affix";
+import { FieldText } from "../FieldText";
+import { BaseInput } from "./BaseInput";
+import { FieldFooter } from "./FieldFooter";
+import { InputContainer } from "./InputContainer";
+import { Label } from "./Label";
 
 export type FieldPassword = Omit<
 	FieldText,

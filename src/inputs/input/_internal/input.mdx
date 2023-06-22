@@ -1,0 +1,20 @@
+
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as InputStories from './input.stories';
+
+<Meta of={InputStories} />
+
+# Inputs
+
+By default inputs are field elements. To used them they must be wrapped in a `FormProvider` element.
+
+## FieldText
+
+<Canvas of={InputStories.Default}/>
+
+```tsx
+<FormProvider>
+    <FieldText iconLeft={<Search />} name="firstName" label="firstName" placeholder={"Jhonatan"}>
+</FormProvider>
+```

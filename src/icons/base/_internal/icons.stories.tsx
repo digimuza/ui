@@ -5,7 +5,7 @@ import { Button } from "../../../buttons/button";
 import { Affix, FieldText } from "../../../inputs/input";
 import * as Icons from "../icons";
 const meta: Meta = {
-	title: "Icons",
+	title: "Icons/Base",
 	parameters: {
 		layout: "fullscreen",
 	},

@@ -17,7 +17,10 @@ function cartesianProduct(arr: number[]): number[][] {
 
 export function generateVariationArray<
   T extends Record<string, readonly unknown[]>
->(variations: T): { [K in keyof T]: T[K][number] }[] {
+>(
+  variations: T,
+  additionalVariations?: { [K in keyof T]: T[K][number] }[]
+): { [K in keyof T]: T[K][number] }[] {
   // const keys = Object.keys(variations);
   const arr = Object.entries(variations).map(([_, val]) => val.length);
 
@@ -29,5 +32,7 @@ export function generateVariationArray<
     return result;
   });
 
-  return combinations as unknown as { [K in keyof T]: T[K][number] }[];
+  return [...combinations, ...(additionalVariations || [])] as unknown as {
+    [K in keyof T]: T[K][number];
+  }[];
 }

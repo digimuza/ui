@@ -1,5 +1,7 @@
 import { VariantProps, cva } from "class-variance-authority";
+import React from "react";
 import { Icon } from "../icons/base";
+import { Tooltip } from "../tooltip/tooltip";
 import { generateVariationArray } from "../utils/cartesianProduct";
 import { cn } from "../utils/cn";
 import { ghostButtonVariant } from "./_internal/ghostButtonVariant";
@@ -40,7 +42,7 @@ const combinations = generateVariationArray({
 });
 
 const variants = cva(
-	"inline-flex items-center transition-all cursor-pointer justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
+	"inline-flex items-center transition-all cursor-pointer justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
 	{
 		compoundVariants: combinations,
 		variants: {
@@ -54,8 +56,13 @@ const variants = cva(
 			variant: {
 				primary: ["enabled:active:ring-2 border rounded-md"],
 				secondary: ["enabled:active:ring-2 border rounded-md"],
-				ghost: ["bg-white", "enabled:active:ring-2 rounded-md"],
-				link: [],
+				ghost: [
+					"bg-white",
+					"enabled:active:ring-2 rounded-md focus-visible:ring-0",
+				],
+				link: [
+					"focus-visible:ring-0 focus-visible:outline -outline-offset-[5px] outline-1 outline-primary-100",
+				],
 			},
 			size: {
 				xs: "h-9 px-3 text-sm space-x-2",
@@ -79,6 +86,7 @@ export type Button = React.ButtonHTMLAttributes<HTMLButtonElement> &
 		iconRight?: React.ReactNode;
 		text?: string;
 		loading?: boolean;
+		tooltip?: React.ReactNode;
 	};
 
 export function Button(props: Button) {
@@ -95,35 +103,38 @@ export function Button(props: Button) {
 		disabled,
 		iconRight,
 		text,
+		tooltip,
 		...rest
 	} = props;
 	return (
-		<button
-			type={type}
-			disabled={disabled || loading}
-			{...rest}
-			className={cn(
-				variants({
-					variant,
-					size,
-					className: cn(!!icon && "shrink aspect-square p-0"),
-					mode,
-				}),
-			)}
-		>
-			{!children && (
-				<>
-					{icon && <Icon size={size}>{icon}</Icon>}
-					{!icon && (
-						<>
-							{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
-							{text && <span>{text}</span>}
-							{iconRight && <Icon size={size}>{iconRight}</Icon>}
-						</>
-					)}
-				</>
-			)}
-			{children}
-		</button>
+		<Tooltip content={tooltip}>
+			<button
+				type={type}
+				disabled={disabled || loading}
+				{...rest}
+				className={cn(
+					variants({
+						variant,
+						size,
+						className: cn(!!icon && "shrink aspect-square p-0"),
+						mode,
+					}),
+				)}
+			>
+				{!children && (
+					<>
+						{icon && <Icon size={size}>{icon}</Icon>}
+						{!icon && (
+							<>
+								{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
+								{text && <span>{text}</span>}
+								{iconRight && <Icon size={size}>{iconRight}</Icon>}
+							</>
+						)}
+					</>
+				)}
+				{children}
+			</button>
+		</Tooltip>
 	);
 }

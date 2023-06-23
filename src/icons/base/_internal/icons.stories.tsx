@@ -1,12 +1,11 @@
 import { Meta } from "@storybook/react";
 import { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Icon } from "..";
 import { Button } from "../../../buttons/button";
-import { FieldText } from "../../../inputs/input";
+import { Affix, FieldText } from "../../../inputs/input";
 import * as Icons from "../icons";
 const meta: Meta = {
-	title: "Icons",
+	title: "Icons/Base",
 	parameters: {
 		layout: "fullscreen",
 	},
@@ -33,11 +32,7 @@ export const All = () => {
 						footer={null}
 						name="search"
 						placeholder="Search"
-						prefix={
-							<Icon className="m-3">
-								<Icons.Search />
-							</Icon>
-						}
+						prefix={<Affix icon={<Icons.Search />} />}
 					/>
 				</div>
 

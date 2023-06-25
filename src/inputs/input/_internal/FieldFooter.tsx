@@ -1,5 +1,5 @@
-import { VariantProps, cva } from "class-variance-authority";
 import { PropsWithChildren } from "react";
+import { VariantProps, cva } from "../../../utils/cva";
 import { useInputContext } from "./InputContext";
 
 const variants = cva("flex justify-start items-start text-sm ", {

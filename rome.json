@@ -15,9 +15,7 @@
 		"enabled": false,
 		"rules": {
 			"recommended": true,
-			"a11y": {
-				"noSvgWithoutTitle": "off"
-			},
+			"a11y": {},
 			"style": {
 				"noUnusedTemplateLiteral": "off"
 			}

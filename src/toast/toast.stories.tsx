@@ -55,7 +55,7 @@ export const Default = () => {
 				mode={"gray"}
 				text="Custom toast"
 				onClick={() => {
-					toast.custom((s) => {
+					toast.custom(() => {
 						return (
 							<motion.div
 								initial={{

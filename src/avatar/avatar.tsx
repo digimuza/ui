@@ -1,8 +1,8 @@
 import * as RAvatar from "@radix-ui/react-avatar";
-import { cva, VariantProps } from "class-variance-authority";
 import { useMemo } from "react";
 import { hash } from "ts-prime";
 import { cn } from "../utils/cn";
+import { VariantProps, cva } from "../utils/cva";
 
 const makeInitials = (title: string) => {
 	return title

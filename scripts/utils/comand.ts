@@ -1,12 +1,12 @@
-import { ROOT_FOLDER } from "./constants.ts";
+import { root } from "./constants.ts";
 import { log, logEnd } from "./log.ts";
 
-export async function execute(description: string, cmd: string) {
+export async function execute(description: string, cmd: string, cwd?: string) {
   const [command, ...rest] = cmd.split(" ");
 
   log(description);
   const process = new Deno.Command(command, {
-    cwd: ROOT_FOLDER,
+    cwd: cwd ?? root(),
     args: rest,
     stderr: "inherit",
     stdout: "inherit",

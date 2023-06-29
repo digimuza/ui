@@ -3,8 +3,14 @@ export * from "./tooltip";
 export * from "./buttons";
 export * from "./layout";
 export * from "./toast";
+export * from "./charts";
 export * from "./utils";
+export * from "./table";
 export * from "./icons";
 export * from "./avatar";
+export * from "./modal";
+export * from "./animations";
 export * from "./inputs";
+export * from "./badge";
 export * from "./provider";
+  

@@ -1,12 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Badge } from "../../badge/badge";
 import { Button } from "../../buttons/button";
 import {
 	Database,
 	Home,
 	MessageSquare,
+	PlusCircle,
 	Settings,
 } from "../../icons/base/icons";
+import { Modal } from "../../modal/modal";
+import { Table, makeColumns } from "../../table/table";
 import { TooltipSettingsProvider } from "../../tooltip/tooltip";
 import { cn } from "../../utils/cn";
 function LayoutDashboardColumn(props: {
@@ -25,7 +29,7 @@ function LayoutDashboardColumn(props: {
 					width: 0,
 				},
 				open: {
-					width: props.width ?? "100%",
+					// width: props.width ?? "100%",
 				},
 			}}
 			initial={intial.current ? "open" : "closed"}
@@ -69,17 +73,182 @@ function LayoutDashboardColumn(props: {
 	);
 }
 
+type SampleType = {
+	id: string;
+	name: string;
+	type: string;
+	lastIndex: string;
+	tokens: number;
+	status: string;
+};
+
+const people = [
+	{
+		name: "nordiclinic.lt",
+		type: "WEB",
+		lastIndex: "2 hours ago",
+		tokens: 12129,
+		status: "OK",
+	},
+	{
+		name: "tbol-core",
+		type: "GITHUB",
+		lastIndex: "3 days ago",
+		tokens: 34544,
+		status: "OK",
+	},
+	{
+		name: "main-core",
+		type: "NOTION",
+		lastIndex: "5 min ago",
+		tokens: 4544,
+		status: "OK",
+	},
+	{
+		name: "documents",
+		type: "GOOGLE DRIVE",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core confluence",
+		type: "CONFLUENCE",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+	{
+		name: "tbol-core jira",
+		type: "JIRA",
+		lastIndex: "5 min ago",
+		tokens: 322544,
+		status: "OK",
+	},
+].map((c): SampleType => ({ ...c, id: Math.random().toString() }));
+
+const table = makeColumns<SampleType>([
+	{
+		id: "name",
+		header: "Name",
+		cell: (row) => row.name,
+	},
+	{
+		id: "type",
+		header: "Type",
+		width: "128px",
+		className: "justify-end",
+		cell: (row) => <Badge variant={"gray"}>{row.type}</Badge>,
+	},
+	{
+		id: "status",
+		width: "64px",
+		className: "justify-center",
+		header: "Status",
+		cell: (row) => <Badge variant={"success"}>{row.status}</Badge>,
+	},
+	{
+		id: "tokens",
+		header: "Tokens",
+		cell: (row) => row.tokens,
+	},
+]);
+
 export function LayoutDashboard() {
-	// const [val, setValue] = useState(false);
+	const [isOpen, setOpen] = useState(false);
 	return (
 		<TooltipSettingsProvider direction={"left"}>
 			<AnimatePresence>
-				<div className="flex h-screen w-screen">
+				<div className="flex h-full w-full">
 					<LayoutDashboardColumn
 						open
 						className="bg-primary-900"
 						index={3}
-						width={80}
+						width={64}
 					>
 						<div className="flex h-full pt-24 space-y-3 items-center flex-col self-stretch">
 							<Button
@@ -110,24 +279,39 @@ export function LayoutDashboard() {
 							<div>Avatar</div>
 						</div>
 					</LayoutDashboardColumn>
-					{/* <LayoutDashboardColumn
-					open={val}
-					className="bg-primary-600"
-					index={10}
-					width={300}
-				>
-					<div>logo</div>
-					<div>chat</div>
-					<div>chat history</div>
-					<div>settings</div>
-				</LayoutDashboardColumn> */}
-					<LayoutDashboardColumn open className="bg-gray-50" index={1}>
-						{/* <Button
-						text="Open"
-						onClick={() => {
-							setValue(!val);
-						}}
-					/> */}
+					<LayoutDashboardColumn open className="bg-gray-100 flex-1" index={1}>
+						<div className="flex flex-col w-full overflow-hidden border-gray-300 bg-white h-full">
+							<div className="sm:flex sm:items-center p-3">
+								<div className="sm:flex-auto">
+									<h1 className="text-base font-semibold leading-6 text-gray-900">
+										Sources
+									</h1>
+									<p className="mt-2 text-sm text-gray-700">
+										A list of all the project in your account including their
+										name, title, email and role.
+									</p>
+								</div>
+
+								<div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+									<Modal open={isOpen} onClose={() => setOpen(false)}>
+										asdjkahsdkjhaksjd
+									</Modal>
+									<Button
+										onClick={() => setOpen(true)}
+										text="Add project"
+										iconLeft={<PlusCircle className="w-5 h-5" />}
+										size={"sm"}
+									></Button>
+								</div>
+							</div>
+							<Table
+								onRowClick={() => {
+									console.log("row clicked");
+								}}
+								columns={table}
+								items={people}
+							></Table>
+						</div>
 					</LayoutDashboardColumn>
 				</div>
 			</AnimatePresence>

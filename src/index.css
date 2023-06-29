@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#storybook-root{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 @layer base {
   :root {
      /* Colors */

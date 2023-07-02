@@ -1,6 +1,6 @@
+import { Eye, EyeOff } from "@digimuza/icons/base";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { Eye, EyeOff } from "../../icons/base/icons";
 import { AffixButton } from "./Affix";
 import { FieldText } from "./FieldText";
 import { BaseInput } from "./_internal/BaseInput";
@@ -23,7 +23,7 @@ export function FieldPassword(props: FieldPassword) {
 		footer,
 		prefix,
 		suffix,
-		disabled,
+		isDisabled,
 	} = props;
 	return (
 		<Controller
@@ -33,7 +33,7 @@ export function FieldPassword(props: FieldPassword) {
 					<InputContextProvider
 						name={name}
 						size={size}
-						disabled={disabled}
+						isDisabled={isDisabled}
 						description={description}
 						footer={footer}
 						placeholder={placeholder ?? "•••••••••••••"}
@@ -47,7 +47,7 @@ export function FieldPassword(props: FieldPassword) {
 							suffix={[
 								...(Array.isArray(suffix) ? suffix : [suffix ?? null]),
 								<AffixButton
-									disabled={disabled}
+									disabled={isDisabled}
 									variant={"link"}
 									mode={"gray"}
 									onClick={() => setVisible(!visible)}

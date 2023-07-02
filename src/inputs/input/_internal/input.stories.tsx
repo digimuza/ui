@@ -1,9 +1,9 @@
+import { AlertCircle, Check, User } from "@digimuza/icons/base";
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Affix, FieldEmail, FieldText } from "..";
 import { Button } from "../../../buttons/button";
-import { AlertCircle, Check, User } from "../../../icons/base/icons";
 import { FieldPassword } from "../FieldPassword";
 
 const meta: Meta = {

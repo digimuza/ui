@@ -1,9 +1,10 @@
+import * as Icons from "@digimuza/icons/base";
 import { Meta } from "@storybook/react";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "../../../buttons/button";
 import { Affix, FieldText } from "../../../inputs/input";
-import * as Icons from "../icons";
+
 const meta: Meta = {
 	title: "Icons/Base",
 	parameters: {

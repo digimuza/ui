@@ -1,9 +1,9 @@
+import { Check } from "@digimuza/icons/base";
 import type { AriaListBoxOptions } from "@react-aria/listbox";
 import type { Node } from "@react-types/shared";
 import * as React from "react";
 import { useListBox, useListBoxSection, useOption } from "react-aria";
 import type { ListState } from "react-stately";
-import { Check } from "../../../icons";
 
 interface ListBoxProps extends AriaListBoxOptions<unknown> {
 	listBoxRef?: React.RefObject<HTMLUListElement>;

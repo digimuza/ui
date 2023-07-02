@@ -1,5 +1,5 @@
+import { Mail } from "@digimuza/icons/base";
 import { Controller } from "react-hook-form";
-import { Mail } from "../../icons/base/icons";
 import { Affix } from "./Affix";
 import { FieldText } from "./FieldText";
 import { BaseInput } from "./_internal/BaseInput";

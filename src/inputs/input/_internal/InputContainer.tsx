@@ -1,3 +1,4 @@
+import { AlertCircle } from "@digimuza/icons/base";
 import { cva } from "class-variance-authority";
 import {
 	PropsWithChildren,
@@ -5,7 +6,6 @@ import {
 	cloneElement,
 	isValidElement,
 } from "react";
-import { AlertCircle } from "../../../icons/base/icons";
 import { cn } from "../../../utils/cn";
 import { Affix } from "../Affix";
 import { useInputContext } from "./InputContext";
@@ -15,7 +15,7 @@ const variants = cva(
 	{
 		variants: {
 			focus: {
-				default: "focus-within:ring-4",
+				default: "focus-within:ring-4 active:ring-4",
 				outOfFocus: "",
 				inFocus: "ring-4",
 			},

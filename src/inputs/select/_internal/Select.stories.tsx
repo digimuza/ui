@@ -2,11 +2,11 @@ import type { Meta } from "@storybook/react";
 import React from "react";
 import { z } from "zod";
 import { Form, useForm } from "../../form";
-import { FieldSelect, Select } from "../Select";
+import { FieldSelect } from "../FieldSelect";
 
-const meta: Meta<typeof Select> = {
+const meta: Meta<typeof FieldSelect> = {
 	title: "Inputs/Select",
-	component: Select,
+	component: FieldSelect,
 	tags: ["autodocs"],
 };
 
@@ -19,11 +19,11 @@ export const Default = () => {
 		}),
 	});
 	return (
-		<Form className="w-full" form={form}>
+		<Form className="w-1/2 p-3" form={form}>
 			<FieldSelect
 				name="sample"
 				label="Favorite Animal"
-				trigger={<FieldSelect.Input className={"w-full"} />}
+				trigger={<FieldSelect.Input />}
 			>
 				<FieldSelect.Item key="red panda">asd</FieldSelect.Item>
 				<FieldSelect.Item key="cat">Cat</FieldSelect.Item>

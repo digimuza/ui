@@ -1,14 +1,14 @@
-import { Meta } from "@storybook/react";
-import React from "react";
-import { Badge } from "../../badge";
-import { Button } from "../../buttons";
 import {
 	Database,
 	Home,
 	MessageSquare,
 	PlusCircle,
 	Settings,
-} from "../../icons";
+} from "@digimuza/icons/base";
+import { Meta } from "@storybook/react";
+import React from "react";
+import { Badge } from "../../badge";
+import { Button } from "../../buttons";
 import { LibraryProvider } from "../../provider";
 import { Table, makeColumns } from "../../table";
 import { Panel } from "./Panel";

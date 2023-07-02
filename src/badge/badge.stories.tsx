@@ -19,7 +19,7 @@ const combinations = generateVariationArray({
 });
 export const All = () => {
 	return (
-		<div className="grid grid-cols-6 gap-3 w-1/2">
+		<div className="flex space-x-1 w-1/2">
 			{combinations.map((combination, index) => {
 				return (
 					<Badge key={`${index}`} {...combination}>

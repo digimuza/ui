@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "..";
 
 interface Column<T extends { id: string }> {

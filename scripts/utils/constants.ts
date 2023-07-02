@@ -5,5 +5,5 @@ export const ROOT_FOLDER = path.resolve(__dirname, "../../");
 export const SOURCE_FOLDER = path.resolve(ROOT_FOLDER, "./src");
 
 export function root(...pathParts: string[]) {
-  return path.resolve(ROOT_FOLDER, ...pathParts);
+	return path.resolve(ROOT_FOLDER, ...pathParts);
 }

@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { z } from "zod";
+import { Affix, FieldText } from "../..";
 import { Badge } from "../../badge/badge";
 import { Button } from "../../buttons/button";
 import {
@@ -9,6 +11,7 @@ import {
 	PlusCircle,
 	Settings,
 } from "../../icons/base/icons";
+import { Form, useForm } from "../../inputs/form";
 import { Modal } from "../../modal/modal";
 import { Table, makeColumns } from "../../table/table";
 import { TooltipSettingsProvider } from "../../tooltip/tooltip";
@@ -90,125 +93,6 @@ const people = [
 		tokens: 12129,
 		status: "OK",
 	},
-	{
-		name: "tbol-core",
-		type: "GITHUB",
-		lastIndex: "3 days ago",
-		tokens: 34544,
-		status: "OK",
-	},
-	{
-		name: "main-core",
-		type: "NOTION",
-		lastIndex: "5 min ago",
-		tokens: 4544,
-		status: "OK",
-	},
-	{
-		name: "documents",
-		type: "GOOGLE DRIVE",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core confluence",
-		type: "CONFLUENCE",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
-	{
-		name: "tbol-core jira",
-		type: "JIRA",
-		lastIndex: "5 min ago",
-		tokens: 322544,
-		status: "OK",
-	},
 ].map((c): SampleType => ({ ...c, id: Math.random().toString() }));
 
 const table = makeColumns<SampleType>([
@@ -233,10 +117,79 @@ const table = makeColumns<SampleType>([
 	},
 	{
 		id: "tokens",
+		width: "200px",
 		header: "Tokens",
-		cell: (row) => row.tokens,
+		cell: (row) => "145K",
+	},
+	{
+		id: "pages",
+		width: "200px",
+		header: "Documents",
+		cell: (row) => "1203",
+	},
+	{
+		id: "pages",
+		width: "200px",
+		header: "Last indexed",
+		cell: (row) => "2 hours ago",
 	},
 ]);
+
+function CreateSourceForm() {
+	const form = useForm({
+		schema: z.object({}),
+	});
+	return (
+		<Form form={form} className="flex flex-col space-y-8 p-4 my-16 mx-8">
+			<div>
+				<h1 className="text-3xl font-medium">Create data source</h1>
+				<div className="mt-3">
+					Create a new data source to start indexing your data.
+				</div>
+			</div>
+			<div className="flex w-full space-x-3">
+				<FieldText
+					description="Used for display purposes only"
+					name={"name"}
+					placeholder="Jira tickets"
+					label="Source name"
+				/>
+				<FieldText
+					description='What type of source is this? e.g. "Google Drive, Confluence, Jira"'
+					name={"type"}
+					label="Source type"
+				/>
+			</div>
+
+			<div className="flex w-full">
+				<FieldText
+					prefix={
+						<Affix>
+							<span className="px-3">https://</span>
+						</Affix>
+					}
+					name={"type"}
+					placeholder="www.example.com"
+					label="Source URL"
+				/>
+			</div>
+			<div className="grow" />
+			<div className="flex justify-end space-x-3 w-full">
+				<Button
+					className="w-64"
+					type={"button"}
+					variant={"secondary"}
+					mode={"destructive"}
+				>
+					Close
+				</Button>
+				<Button className="w-64" type='submit'>
+					Create
+				</Button>
+			</div>
+		</Form>
+	);
+}
 
 export function LayoutDashboard() {
 	const [isOpen, setOpen] = useState(false);
@@ -279,10 +232,17 @@ export function LayoutDashboard() {
 							<div>Avatar</div>
 						</div>
 					</LayoutDashboardColumn>
-					<LayoutDashboardColumn open className="bg-gray-100 flex-1" index={1}>
-						<div className="flex flex-col w-full overflow-hidden border-gray-300 bg-white h-full">
-							<div className="sm:flex sm:items-center p-3">
-								<div className="sm:flex-auto">
+
+					<LayoutDashboardColumn
+						width={400}
+						open
+						className="bg-gray-100 flex-1 p-3 text-slate-700"
+						index={1}
+					>
+						<div className="flex flex-col w-full overflow-hidden border-gray-300 rounded-lg bg-white h-full">
+							<div className="p-3 text-3xl font-medium bg-gray-300">Home</div>
+							<div className="flex sm:items-center p-3">
+								<div className="flex flex-col sm:flex-auto">
 									<h1 className="text-base font-semibold leading-6 text-gray-900">
 										Sources
 									</h1>
@@ -294,14 +254,14 @@ export function LayoutDashboard() {
 
 								<div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
 									<Modal open={isOpen} onClose={() => setOpen(false)}>
-										asdjkahsdkjhaksjd
+										<CreateSourceForm />
 									</Modal>
 									<Button
 										onClick={() => setOpen(true)}
 										text="Add project"
 										iconLeft={<PlusCircle className="w-5 h-5" />}
 										size={"sm"}
-									></Button>
+									/>
 								</div>
 							</div>
 							<Table
@@ -310,7 +270,7 @@ export function LayoutDashboard() {
 								}}
 								columns={table}
 								items={people}
-							></Table>
+							/>
 						</div>
 					</LayoutDashboardColumn>
 				</div>

@@ -13,14 +13,17 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "publish": "deno run -A scripts/publish.ts",
+    "format": "rome format --write ./",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@blueprintjs/core": "^5.0.1",
     "@blueprintjs/table": "^5.0.1",
+    "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.6",
+    "@react-types/select": "^3.8.1",
     "@tanstack/react-table": "^8.9.3",
     "@types/cleave.js": "^1.4.7",
     "class-variance-authority": "^0.6.0",
@@ -32,11 +35,14 @@
     "framer-motion": "^10.12.16",
     "rc-select": "^14.5.2",
     "react": "^18.2.0",
+    "react-aria": "^3.26.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-hot-toast": "^2.4.1",
+    "react-stately": "^3.24.0",
     "tailwind-merge": "^1.13.2",
-    "ts-prime": "^1.0.1"
+    "ts-prime": "^1.0.1",
+    "zod": "^3.21.4"
   },
   "license": "MIT",
   "devDependencies": {

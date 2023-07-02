@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { ForwardedRef, PropsWithChildren, forwardRef } from "react";
 import { Button } from "../../buttons/button";
 import { Icon } from "../../icons/base";
 import { cn } from "../../utils/cn";
@@ -26,10 +26,16 @@ export function Affix(props: PropsWithChildren<Affix>) {
 	);
 }
 
-export function AffixButton(props: Button & { position?: "left" | "right" }) {
-	return (
-		<Affix position={props.position}>
-			<Button {...props} type={"button"} />
-		</Affix>
-	);
-}
+export const AffixButton = forwardRef(
+	(
+		props: Button & { position?: "left" | "right" },
+		ref: ForwardedRef<HTMLButtonElement>,
+	) => {
+		const { position, ...rest } = props;
+		return (
+			<Affix position={props.position}>
+				<Button {...rest} ref={ref} type={"button"} />
+			</Affix>
+		);
+	},
+);

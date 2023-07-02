@@ -8,7 +8,7 @@ await buildProject();
 
 const packageJson = await getPackageJson();
 await execute(
-  "Publish",
-  `yarn publish --new-version ${packageJson.version}`,
-  root("dist")
+	"Publish",
+	`yarn publish --new-version ${packageJson.version}`,
+	root("dist"),
 );

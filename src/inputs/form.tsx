@@ -35,11 +35,9 @@ export function Form<T extends FieldValues>(
 		<FormProvider {...form}>
 			<form
 				{...rest}
-				onSubmit={() => {
-					form.handleSubmit((data) => {
-						onSubmit?.(data);
-					});
-				}}
+				onSubmit={form.handleSubmit((data) => {
+					onSubmit?.(data);
+				})}
 			>
 				{props.children}
 			</form>

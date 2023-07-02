@@ -29,7 +29,7 @@ export function Tooltip(props: {
 	if (content == null) return <>{children}</>;
 	return (
 		<RToolTip.Root>
-			<RToolTip.Trigger>{children}</RToolTip.Trigger>
+			<RToolTip.Trigger asChild>{children}</RToolTip.Trigger>
 			<RToolTip.Portal>
 				<RToolTip.Content
 					side={direction}

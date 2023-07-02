@@ -51,7 +51,8 @@ export function Table<T extends { id: string }>(props: {
 				<tbody className="divide-y divide-gray-200 overflow-y-scroll grow">
 					{items.map((item) => {
 						return (
-							<tr
+							// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+<tr
 								onClick={() => props.onRowClick?.(item)}
 								style={{
 									display: "grid",
@@ -65,7 +66,7 @@ export function Table<T extends { id: string }>(props: {
 									<td
 										key={id}
 										className={cn(
-											"col-span-1 flex border-r justify-start items-center whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900",
+											"col-span-1 flex border-r border-b justify-start items-center whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900",
 											className,
 											cellClassName,
 										)}

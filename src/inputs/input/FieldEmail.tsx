@@ -15,7 +15,7 @@ export function FieldEmail(props: FieldText) {
 		description,
 		footer,
 		size,
-		disabled,
+		isDisabled,
 		placeholder,
 		prefix,
 		suffix,
@@ -33,7 +33,7 @@ export function FieldEmail(props: FieldText) {
 						placeholder={placeholder ?? "example@example.com"}
 						label={label}
 						type={"email"}
-						disabled={disabled}
+						isDisabled={isDisabled}
 						error={fieldState.error?.message}
 					>
 						<Label />

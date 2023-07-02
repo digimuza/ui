@@ -9,7 +9,7 @@ export type FieldText = {
 	name: string;
 	label?: string;
 	placeholder?: string;
-	disabled?: boolean;
+	isDisabled?: boolean;
 	description?: string;
 	prefix?: React.ReactNode | React.ReactNode[];
 	suffix?: React.ReactNode | React.ReactNode[];
@@ -23,7 +23,7 @@ export function FieldText(props: FieldText) {
 		description,
 		size,
 		placeholder,
-		disabled,
+		isDisabled,
 		prefix,
 		suffix,
 		footer,
@@ -35,7 +35,7 @@ export function FieldText(props: FieldText) {
 				return (
 					<InputContextProvider
 						name={name}
-						disabled={disabled}
+						isDisabled={isDisabled}
 						size={size}
 						description={description}
 						footer={footer}

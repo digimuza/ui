@@ -11,9 +11,14 @@ import { Affix } from "../Affix";
 import { useInputContext } from "./InputContext";
 
 const variants = cva(
-	"group flex border outline-none relative text-gray-500 h-11 bg-white shadow-sm focus-within:ring-4 rounded-lg overflow-hidden justify-between items-center",
+	"group flex border outline-none relative text-gray-500 h-11 bg-white shadow-sm rounded-lg overflow-hidden justify-between items-center",
 	{
 		variants: {
+			focus: {
+				default: "focus-within:ring-4",
+				outOfFocus: "",
+				inFocus: "ring-4",
+			},
 			variant: {
 				default: "border-gray-300 ring-primary-100 shadow-sm",
 				error: "border-error-300 ring-error-100",
@@ -27,6 +32,7 @@ const variants = cva(
 			},
 		},
 		defaultVariants: {
+			focus: "default",
 			variant: "default",
 			size: "md",
 		},
@@ -62,7 +68,7 @@ export function addAdditionalProps(
 
 export function InputContainer(props: PropsWithChildren<InputContainer>) {
 	const { children, className, prefix, suffix } = props;
-	const { error, size } = useInputContext();
+	const { error, size, isFocused } = useInputContext();
 
 	const clonedPrefix = addAdditionalProps(prefix, { position: "left" });
 	const clonedSuffix = addAdditionalProps(suffix, { position: "right" });
@@ -71,6 +77,8 @@ export function InputContainer(props: PropsWithChildren<InputContainer>) {
 			className={variants({
 				className,
 				size: size,
+				focus:
+					isFocused == null ? "default" : isFocused ? "inFocus" : "outOfFocus",
 				variant: error ? "error" : "default",
 			})}
 		>

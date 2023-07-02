@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import React from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import { Icon } from "../icons/base";
 import { Tooltip } from "../tooltip/tooltip";
 import { generateVariationArray } from "../utils/cartesianProduct";
@@ -89,52 +89,55 @@ export type Button = React.ButtonHTMLAttributes<HTMLButtonElement> &
 		tooltip?: React.ReactNode;
 	};
 
-export function Button(props: Button) {
-	const {
-		className,
-		type,
-		children,
-		variant,
-		size,
-		icon,
-		mode,
-		iconLeft,
-		loading,
-		disabled,
-		iconRight,
-		text,
-		tooltip,
-		...rest
-	} = props;
-	return (
-		<Tooltip content={tooltip}>
-			<button
-				type={type}
-				disabled={disabled || loading}
-				{...rest}
-				className={cn(
-					variants({
-						variant,
-						size,
-						className: cn(!!icon && "shrink aspect-square p-0"),
-						mode,
-					}),
-				)}
-			>
-				{!children && (
-					<>
-						{icon && <Icon size={size}>{icon}</Icon>}
-						{!icon && (
-							<>
-								{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
-								{text && <span>{text}</span>}
-								{iconRight && <Icon size={size}>{iconRight}</Icon>}
-							</>
-						)}
-					</>
-				)}
-				{children}
-			</button>
-		</Tooltip>
-	);
-}
+export const Button = forwardRef(
+	(props: Button, ref: ForwardedRef<HTMLButtonElement>) => {
+		const {
+			className,
+			type,
+			children,
+			variant,
+			size,
+			icon,
+			mode,
+			iconLeft,
+			loading,
+			disabled,
+			iconRight,
+			text,
+			tooltip,
+			...rest
+		} = props;
+		return (
+			<Tooltip content={tooltip}>
+				<button
+					ref={ref}
+					type={type}
+					disabled={disabled || loading}
+					{...rest}
+					className={cn(
+						variants({
+							variant,
+							size,
+							className: cn(!!icon && "shrink aspect-square p-0", className),
+							mode,
+						}),
+					)}
+				>
+					{!children && (
+						<>
+							{icon && <Icon size={size}>{icon}</Icon>}
+							{!icon && (
+								<>
+									{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
+									{text && <span>{text}</span>}
+									{iconRight && <Icon size={size}>{iconRight}</Icon>}
+								</>
+							)}
+						</>
+					)}
+					{children}
+				</button>
+			</Tooltip>
+		);
+	},
+);

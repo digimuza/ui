@@ -10,39 +10,39 @@ import { useEffect } from "react";
  * passing it into this hook
  */
 export function useOnClickOutside(
-  ref:
-    | HTMLDivElement
-    | null
-    | (HTMLElement | null)[]
-    | (HTMLDivElement | null)[],
-  onOutsideClick: () => void
+	ref:
+		| HTMLDivElement
+		| null
+		| (HTMLElement | null)[]
+		| (HTMLDivElement | null)[],
+	onOutsideClick: () => void,
 ) {
-  useEffect(() => {
-    const checkIfClickedItemIsInsideRefList = (event: Event) => {
-      if (event.target == null) return;
-      if (!(event.target instanceof Node)) return;
-      if (ref == null) return;
+	useEffect(() => {
+		const checkIfClickedItemIsInsideRefList = (event: Event) => {
+			if (event.target == null) return;
+			if (!(event.target instanceof Node)) return;
+			if (ref == null) return;
 
-      const refList = Array.isArray(ref) ? ref : [ref];
-      const isInsideRefList = refList.some((referenceElement) => {
-        const isRefTargetIsNode = event.target instanceof Node;
-        if (!isRefTargetIsNode) return false;
-        return referenceElement?.contains(event.target);
-      });
-      if (isInsideRefList) return;
-      onOutsideClick();
-    };
-    document.addEventListener("mousedown", checkIfClickedItemIsInsideRefList);
-    document.addEventListener("touchstart", checkIfClickedItemIsInsideRefList);
-    return () => {
-      document.removeEventListener(
-        "mousedown",
-        checkIfClickedItemIsInsideRefList
-      );
-      document.removeEventListener(
-        "touchstart",
-        checkIfClickedItemIsInsideRefList
-      );
-    };
-  }, [ref, onOutsideClick]);
+			const refList = Array.isArray(ref) ? ref : [ref];
+			const isInsideRefList = refList.some((referenceElement) => {
+				const isRefTargetIsNode = event.target instanceof Node;
+				if (!isRefTargetIsNode) return false;
+				return referenceElement?.contains(event.target);
+			});
+			if (isInsideRefList) return;
+			onOutsideClick();
+		};
+		document.addEventListener("mousedown", checkIfClickedItemIsInsideRefList);
+		document.addEventListener("touchstart", checkIfClickedItemIsInsideRefList);
+		return () => {
+			document.removeEventListener(
+				"mousedown",
+				checkIfClickedItemIsInsideRefList,
+			);
+			document.removeEventListener(
+				"touchstart",
+				checkIfClickedItemIsInsideRefList,
+			);
+		};
+	}, [ref, onOutsideClick]);
 }

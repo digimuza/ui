@@ -42,7 +42,7 @@ const combinations = generateVariationArray({
 });
 
 const variants = cva(
-	"inline-flex items-center transition-all cursor-pointer justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
+	"inline-flex border items-center transition-all cursor-pointer justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed ring-offset-background",
 	{
 		compoundVariants: combinations,
 		variants: {
@@ -53,15 +53,23 @@ const variants = cva(
 				warning: true,
 				default: true,
 			},
+			_rounding: {
+				default: "rounded-lg",
+				none: "",
+				left: "rounded-l-lg",
+				right: "rounded-r-lg",
+			},
+
+			_focus: {
+				default: "enabled:active:ring-4 enable:focus-visible:ring-4",
+				inset: "enabled:active:-ring-2 enable:focus-visible:ring-4",
+			},
 			variant: {
-				primary: ["enabled:active:ring-2 border rounded-md"],
-				secondary: ["enabled:active:ring-2 border rounded-md"],
-				ghost: [
-					"bg-white",
-					"enabled:active:ring-2 rounded-md focus-visible:ring-0",
-				],
+				primary: [],
+				secondary: [],
+				ghost: ["enabled:active:ring-0 focus-visible:ring-0"],
 				link: [
-					"focus-visible:ring-0 focus-visible:outline -outline-offset-[5px] outline-1 outline-primary-100",
+					"focus-visible:ring-0 border-transparent focus-visible:outline -outline-offset-[5px] outline-1 outline-primary-100",
 				],
 			},
 			size: {
@@ -73,6 +81,8 @@ const variants = cva(
 			},
 		},
 		defaultVariants: {
+			_focus: "default",
+			_rounding: "default",
 			variant: "primary",
 			mode: "default",
 			size: "md",
@@ -104,6 +114,9 @@ export const Button = forwardRef(
 			disabled,
 			iconRight,
 			text,
+			// These are private
+			_focus,
+			_rounding,
 			tooltip,
 			...rest
 		} = props;
@@ -116,6 +129,8 @@ export const Button = forwardRef(
 					{...rest}
 					className={cn(
 						variants({
+							_rounding,
+							_focus,
 							variant,
 							size,
 							className: cn(!!icon && "shrink aspect-square p-0", className),
@@ -123,19 +138,16 @@ export const Button = forwardRef(
 						}),
 					)}
 				>
-					{!children && (
-						<>
-							{icon && <Icon size={size}>{icon}</Icon>}
-							{!icon && (
-								<>
-									{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
-									{text && <span>{text}</span>}
-									{iconRight && <Icon size={size}>{iconRight}</Icon>}
-								</>
-							)}
-						</>
-					)}
-					{children}
+					<>
+						{icon && <Icon size={size}>{icon}</Icon>}
+						{!icon && (
+							<>
+								{iconLeft && <Icon size={size}>{iconLeft}</Icon>}
+								{text ? <span>{text}</span> : <span>{children}</span>}
+								{iconRight && <Icon size={size}>{iconRight}</Icon>}
+							</>
+						)}
+					</>
 				</button>
 			</Tooltip>
 		);

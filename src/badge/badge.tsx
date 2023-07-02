@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "..";
 
 const variants = cva(
-	"inline-flex items-center justify-center items-center rounded-lg text-white px-2 py-1 text-xs font-medium",
+	"inline-flex max-w-fit shrink items-center justify-center items-center rounded-lg text-white px-2 py-1 text-xs font-medium",
 	{
 		variants: {
 			variant: {

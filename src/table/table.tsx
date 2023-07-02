@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "..";
 
 interface Column<T extends { id: string }> {
@@ -15,17 +14,24 @@ export function makeColumns<T extends { id: string }>(columns: Column<T>[]) {
 }
 
 export function Table<T extends { id: string }>(props: {
+	isFluid?: boolean;
 	items: T[];
 	onRowClick?: (row: T) => void;
 	columns: Column<T>[];
 }) {
-	const { columns, items } = props;
+	const { columns, items, isFluid } = props;
 	const cols = `${columns
 		.map((c) => `${c.width ?? "minmax(0, 1fr)"}`)
 		.join(" ")}`;
+
 	return (
 		<>
-			<table className="flex flex-col min-w-full divide-y divide-gray-200 overflow-scroll">
+			<table
+				className={cn(
+					"flex flex-col min-w-full divide-y divide-gray-200 overflow-scroll items-stretch",
+					isFluid && "h-full",
+				)}
+			>
 				<thead className="sticky">
 					<tr
 						style={{
@@ -52,7 +58,7 @@ export function Table<T extends { id: string }>(props: {
 					{items.map((item) => {
 						return (
 							// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-<tr
+							<tr
 								onClick={() => props.onRowClick?.(item)}
 								style={{
 									display: "grid",

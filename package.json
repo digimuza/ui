@@ -1,7 +1,7 @@
 {
   "name": "@digimuza/ui",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.3",
   "type": "module",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -12,7 +12,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "publish": "deno run -A scripts/publish.ts",
+    "release": "deno run -A scripts/publish.ts",
     "format": "rome format --write ./",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -20,6 +20,7 @@
   "dependencies": {
     "@blueprintjs/core": "^5.0.1",
     "@blueprintjs/table": "^5.0.1",
+    "@digimuza/icons": "^0.0.2",
     "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.6",

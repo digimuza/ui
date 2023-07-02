@@ -1,6 +1,6 @@
+import { Package } from "@digimuza/icons/base";
 import type { Meta, StoryFn } from "@storybook/react";
 import React from "react";
-import { Package } from "../../icons/base/icons";
 import { generateVariationArray } from "../../utils/cartesianProduct";
 import { Button } from "../button";
 

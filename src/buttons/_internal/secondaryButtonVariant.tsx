@@ -3,7 +3,7 @@ import { Mode } from "./types";
 export function secondaryButtonVariant(mode: Mode) {
 	if (mode === "gray") {
 		return [
-			"bg-gray-50 ring-gray-200 text-gray-50f border-gray-50",
+			"bg-gray-50 ring-gray-200 data-state-active:bg-gray-100 text-gray-50f border-gray-50",
 			"disabled:bg-gray-25 disabled:text-gray-300 disabled:border-gray-25",
 			"hover:bg-gray-100",
 		];
@@ -30,7 +30,7 @@ export function secondaryButtonVariant(mode: Mode) {
 		];
 	}
 	return [
-		"bg-primary-50 ring-primary-200 text-primary-50f border-primary-50",
+		"bg-primary-50 data-state-active:bg-primary-100 ring-primary-200 text-primary-50f border-primary-50",
 		"disabled:bg-primary-25 disabled:text-primary-300 disabled:border-primary-25",
 		"hover:bg-primary-100",
 	];

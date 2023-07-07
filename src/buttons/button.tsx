@@ -89,13 +89,17 @@ const variants = cva(
 		},
 	},
 );
-export type Button = React.ButtonHTMLAttributes<HTMLButtonElement> &
+export type Button = Omit<
+	React.ButtonHTMLAttributes<HTMLButtonElement>,
+	"value"
+> &
 	VariantProps<typeof variants> & {
 		icon?: React.ReactNode;
 		iconLeft?: React.ReactNode;
 		iconRight?: React.ReactNode;
 		text?: string;
 		loading?: boolean;
+		value?: string;
 		tooltip?: React.ReactNode;
 	};
 

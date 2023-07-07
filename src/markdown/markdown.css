@@ -1,0 +1,13 @@
+
+
+.markdown{
+    /* font-size: 12px; */
+    @apply p-8 bg-gray-25 text-sm
+}
+.markdown h1 {
+    @apply text-xl font-medium pb-3
+}
+
+.markdown h2 {
+    @apply text-base font-medium my-3
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { cn } from "..";
 import { alterProps } from "../utils/props";
 import { Button } from "./button";
 
@@ -6,6 +7,8 @@ export function ButtonGroup(props: {
 	children: React.ReactNode;
 	defaultActive?: Button["value"];
 	variant?: Exclude<Button["variant"], "link">;
+	active?: Button["value"];
+	isFluid?: boolean;
 	mode?: Button["mode"];
 	disabled?: boolean;
 	size?: Button["size"];
@@ -16,8 +19,10 @@ export function ButtonGroup(props: {
 		defaultActive,
 		onActiveChange,
 		variant = "ghost",
+		isFluid,
 		disabled,
 		mode = "gray",
+		active: controlledActive,
 		size,
 	} = props;
 	const [active, setActive] = useState<Button["value"]>(
@@ -32,7 +37,8 @@ export function ButtonGroup(props: {
 		children,
 		(childProps, index, arr) => {
 			const activeState =
-				childProps.value != null && childProps.value === active
+				childProps.value != null &&
+				childProps.value === (controlledActive ?? active)
 					? {
 							"data-state": "active",
 					  }
@@ -55,5 +61,9 @@ export function ButtonGroup(props: {
 		},
 	);
 
-	return <div className="inline-flex space-x-[1px]">{alteredChildren}</div>;
+	return (
+		<div className={cn("inline-flex space-x-[1px]", isFluid && "w-full")}>
+			{alteredChildren}
+		</div>
+	);
 }

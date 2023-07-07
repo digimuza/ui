@@ -1,4 +1,6 @@
 import type { Preview } from "@storybook/react";
+
+import "../node_modules/normalize.css/normalize.css";
 import "../src/index.css";
 const preview: Preview = {
 	parameters: {

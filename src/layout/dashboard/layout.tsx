@@ -6,10 +6,10 @@ function LayoutDashboardColumn(props: {
 	children: React.ReactNode;
 	width?: string | number;
 	open: boolean;
-	index: number;
+	index?: number;
 	className?: string;
 }) {
-	const intial = useRef(props.open);
+	const initial = useRef(props.open);
 	const { className } = props;
 	return (
 		<motion.div
@@ -18,21 +18,18 @@ function LayoutDashboardColumn(props: {
 					width: 0,
 				},
 				open: {
-					// width: props.width ?? "100%",
+					width: props.width ?? "100%",
 				},
 			}}
-			initial={intial.current ? "open" : "closed"}
+			initial={initial.current ? "open" : "closed"}
 			animate={props.open ? "open" : "closed"}
-			style={{
-				zIndex: props.index,
-			}}
 			transition={{
 				delay: 0.1,
 			}}
-			className={cn(
-				"shrink-0 shadow-lg h-full self-stretch overflow-hidden",
-				className,
-			)}
+			style={{
+				zIndex: props.index,
+			}}
+			className={cn("shrink-0 h-full overflow-hidden", className)}
 		>
 			<motion.div
 				variants={{
@@ -52,7 +49,6 @@ function LayoutDashboardColumn(props: {
 				animate={props.open ? "open" : "closed"}
 				style={{
 					minWidth: props.width ?? "100%",
-					zIndex: props.index,
 				}}
 				className="h-full"
 			>

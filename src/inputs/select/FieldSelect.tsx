@@ -19,12 +19,15 @@ export type FieldSelect = {
 export function FieldSelect<T>(
 	props: AriaSelectProps<T> & { name: string; trigger?: React.ReactNode },
 ) {
-	const { name, children, trigger } = props;
+	const { name, children, trigger, ...rest } = props;
 	return (
 		<Controller
 			name={name}
 			render={({ field, fieldState }) => (
 				<Select
+					// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+					{...(rest as any)}
+					selectedKey={field.value}
 					trigger={trigger}
 					name={name}
 					onBlur={field.onBlur}

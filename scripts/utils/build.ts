@@ -1,6 +1,26 @@
+import { copySync, walkSync } from "https://deno.land/std@0.153.0/fs/mod.ts";
+import { globToRegExp } from "https://deno.land/std@0.55.0/path/glob.ts";
 import { execute } from "./command.ts";
 import { root } from "./constants.ts";
 import { log, logEnd } from "./log.ts";
+
+const files = walkSync(root("./src"), {
+	match: [globToRegExp("**/*.css")],
+});
+
+function moveAllCss() {
+	return Array.from(files)
+		.map((c) => {
+			return {
+				...c,
+				cpTo: c.path.replace("/src/", "/dist/dist/"),
+			};
+		})
+		.filter((c) => c.name !== "index.css")
+		.forEach((c) => {
+			return copySync(c.path, c.cpTo);
+		});
+}
 
 export async function buildProject() {
 	await execute("Installing deps", "yarn");
@@ -9,6 +29,8 @@ export async function buildProject() {
 		"Building typescript",
 		"yarn tsc --project ./tsconfig.build.json",
 	);
+
+	moveAllCss();
 
 	log("Copying package.json");
 

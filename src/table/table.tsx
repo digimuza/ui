@@ -1,7 +1,7 @@
 import { cn } from "..";
 import { LoaderSpinner } from "../loader/loader";
 
-interface Column<T extends { id: string }> {
+interface Column<T extends { id: string | number }> {
 	id: string;
 	width?: string;
 	className?: string;
@@ -10,14 +10,16 @@ interface Column<T extends { id: string }> {
 	cellClassName?: string;
 	cell: (row: T) => React.ReactNode;
 }
-export function makeColumns<T extends { id: string }>(columns: Column<T>[]) {
+export function makeColumns<T extends { id: string | number }>(
+	columns: Column<T>[],
+) {
 	return columns;
 }
 
 export function Table<T extends { id: string }>(props: {
 	isFluid?: boolean;
 	isLoading?: boolean;
-	items: T[];
+	items?: T[];
 	onRowClick?: (row: T) => void;
 	columns: Column<T>[];
 }) {
@@ -26,7 +28,7 @@ export function Table<T extends { id: string }>(props: {
 		.map((c) => `${c.width ?? "minmax(0, 1fr)"}`)
 		.join(" ")}`;
 
-	if (items.length === 0) {
+	if (items?.length === 0) {
 		return (
 			<div className="h-full w-full flex flex-col justify-center items-center">
 				<div className="text-gray-300">No items...</div>
@@ -47,7 +49,7 @@ export function Table<T extends { id: string }>(props: {
 		<>
 			<table
 				className={cn(
-					"flex flex-col min-w-full divide-y divide-gray-200 overflow-hidden bg-transparent  h-full items-stretch",
+					"flex flex-col min-w-full divide-y divide-gray-200 overflow-hidden no-scrollbar bg-transparent  h-full items-stretch",
 					isFluid && "h-full",
 				)}
 			>
@@ -72,8 +74,8 @@ export function Table<T extends { id: string }>(props: {
 						))}
 					</tr>
 				</thead>
-				<tbody className="divide-y divide-gray-200 overflow-y-scroll grow">
-					{items.map((item) => {
+				<tbody className="divide-y divide-gray-200 overflow-y-scroll no-scrollbar grow">
+					{items?.map((item) => {
 						return (
 							// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 							<tr
@@ -92,7 +94,7 @@ export function Table<T extends { id: string }>(props: {
 									<td
 										key={id}
 										className={cn(
-											"col-span-1 overflow-hidden truncate min-w-[64px] flex border-r border-b justify-start items-center whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900",
+											"col-span-1 overflow-hidden truncate min-w-[64px] flex border-r justify-start items-center whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900",
 											className,
 											cellClassName,
 										)}

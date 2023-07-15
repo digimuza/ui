@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactNode } from "react";
+import { cn } from "../../utils/cn";
 
 const LayoutPanelHeader = (props: {
 	title: ReactNode;
@@ -6,17 +7,22 @@ const LayoutPanelHeader = (props: {
 	className?: string;
 	extra?: ReactNode;
 }) => {
-	const { title, extra, subtitle } = props;
+	const { title, extra, subtitle, className } = props;
 	return (
-		<div className="flex sm:items-center p-3 min-h-[54px] border-b border-collapse z-20  bg-transparent">
+		<div
+			className={cn(
+				"flex sm:items-center p-3 min-h-[54px] border-b border-collapse z-20  bg-transparent",
+				className,
+			)}
+		>
 			<div className="flex flex-col sm:flex-auto">
-				<h1 className="text-xl font-light font-sans leading-6 text-gray-700">
+				<h1 className="text-xl font-light font-sans leading-6 text-gray-700 max-w-[600px] truncate overflow-hidden">
 					{title}
 				</h1>
 				{subtitle && <p className="mt-2 text-sm text-gray-700">{subtitle}</p>}
 			</div>
 
-			<div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">{extra}</div>
+			<div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none ">{extra}</div>
 		</div>
 	);
 };

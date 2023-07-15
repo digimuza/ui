@@ -5,14 +5,14 @@ import { Button } from "./button";
 
 export function ButtonGroup(props: {
 	children: React.ReactNode;
-	defaultActive?: Button["value"];
+	defaultActive?: string;
 	variant?: Exclude<Button["variant"], "link">;
-	active?: Button["value"];
+	active?: string;
 	isFluid?: boolean;
 	mode?: Button["mode"];
 	disabled?: boolean;
 	size?: Button["size"];
-	onActiveChange?: (value: Button["value"]) => void;
+	onActiveChange?: (value?: string) => void;
 }) {
 	const {
 		children,
@@ -25,7 +25,7 @@ export function ButtonGroup(props: {
 		active: controlledActive,
 		size,
 	} = props;
-	const [active, setActive] = useState<Button["value"]>(
+	const [active, setActive] = useState<string | undefined>(
 		defaultActive ?? undefined,
 	);
 
@@ -51,7 +51,9 @@ export function ButtonGroup(props: {
 				...activeState,
 				...childProps,
 				onClick: (event) => {
-					setActive(childProps?.value);
+					const val = childProps?.value;
+					if (typeof val !== "string") return;
+					setActive(val);
 					childProps.onClick?.(event);
 				},
 				_focus: "inset",

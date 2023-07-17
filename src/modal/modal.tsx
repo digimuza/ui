@@ -39,6 +39,9 @@ export function Modal(
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					open={props.open}
+					style={{
+						zIndex: 1000,
+					}}
 					className="fixed top-0 backdrop-blur h-screen w-screen flex justify-center items-center z-50 bg-gray-900/50"
 				>
 					<ModalContent onClose={props.onClose}>{props.children}</ModalContent>

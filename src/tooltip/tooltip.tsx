@@ -19,20 +19,25 @@ export function TooltipSettingsProvider(
 		</TooltipDirectionContext.Provider>
 	);
 }
-
+export interface Tooltip {
+	children?: React.ReactNode;
+	content?: React.ReactNode;
+	direction?: "bottom" | "left" | "right" | "top";
+}
 export function Tooltip(props: {
 	children?: React.ReactNode;
 	content?: React.ReactNode;
+	direction?: "bottom" | "left" | "right" | "top";
 }) {
-	const { children, content } = props;
+	const { children, content, direction: xDirection } = props;
 	const { direction } = useContext(TooltipDirectionContext);
 	if (content == null) return <>{children}</>;
 	return (
 		<RToolTip.Root>
-			<RToolTip.Trigger>{children}</RToolTip.Trigger>
+			<RToolTip.Trigger asChild>{children}</RToolTip.Trigger>
 			<RToolTip.Portal>
 				<RToolTip.Content
-					side={direction}
+					side={xDirection ?? direction}
 					asChild
 					forceMount
 					className="rounded-md p-3 z-50 bg-gray-900 shadow-md text-sm text-gray-900f"
